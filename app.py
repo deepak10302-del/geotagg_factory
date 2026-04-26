@@ -32,36 +32,6 @@ if file:
 
     df = df[df['Type'].isin(type_filter)]
 
-    # Date filter
-    min_date = df['Last_Camp'].min()
-    max_date = df['Last_Camp'].max()
-
-    date_range = st.sidebar.date_input(
-        "Last Camp Date Range",
-        [min_date, max_date]
-    )
-
-    df = df[
-        (df['Last_Camp'] >= pd.to_datetime(date_range[0])) &
-        (df['Last_Camp'] <= pd.to_datetime(date_range[1]))
-    ]
-
-
-    # -----------------------------
-    # SIDEBAR FILTERS
-    # -----------------------------
-    st.sidebar.header("Filters")
-
-    # 🔽 Type filter
-    type_filter = st.sidebar.multiselect(
-        "Select Type",
-        options=df['Type'].dropna().unique(),
-        default=df['Type'].dropna().unique(),
-	key="type_filter"
-    )
-
-    df = df[df['Type'].isin(type_filter)]
-
     # 🎚️ IP Slider
     min_ips = int(df['Number_of_IPs'].min())
     max_ips = int(df['Number_of_IPs'].max())
