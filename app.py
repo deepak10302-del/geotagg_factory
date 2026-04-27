@@ -24,6 +24,12 @@ if file:
     # Sidebar filters
     st.sidebar.header("Filters")
 
+	# add search box for factories
+    factory_name = st.sidebar.selectbox(
+    "Search Factory",
+    options=["All"] + sorted(df['Name'].dropna().unique()),
+    key="factory_search")
+	
     type_filter = st.sidebar.multiselect(
         "Select Type",
         df['Type'].unique(),
